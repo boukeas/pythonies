@@ -1,0 +1,305 @@
+%%% το αρχείο αυτό καθορίζει το look που έχουν οι pythonies
+%%% γίνεται \input από όλα τα κεφάλαια και τα φύλλα εργασίας
+
+% χρησιμοποιούμενα πακέτα: 
+% 
+% polyglossia
+% xstring
+% graphicx
+% caption
+% xcolor
+% hyperref
+% minted
+% geometry
+% titlesec
+% datetime
+% changepage
+% ntheorem
+
+% οριζόμενες εντολές:
+%
+% smallcaps (βοηθ. removeaccents)
+%    μικρά κεφαλαία χωρίς τόνους στα φωνήεντα
+% scaling
+%    η κλιμάκωση *όλων* των illustrations, τρέχουσα τιμή 0.9
+% iconcomputer, iconkeyboard, icondiscuss, iconfillin, iconcaution, iconprompt, dottedline
+%    εικονίδια για τα φύλλα εργασίας και εστιγμένη γραμμή
+% marginnote
+%    πλευρικό σχόλιο
+% chapterwabstract (βοηθ. abstract, boxcolor, chaptercolor, concepts, tmpconcepts)
+%    εισαγωγικό κείμενο κεφαλαίου με χρωματιστό τετράγωνο, συνοδευτικές έννοιες, κλπ.
+% tobecontinued
+%    εμφανίζει το "συνεχίζεται στην επόμενη σελίδα"
+
+% οριζόμενα περιβάλλοντα:
+% 
+% note
+%    μια υποσημείωση ή υπόδειξη, με μικρότερα γράμματα
+% question
+%    μια ερώτηση που "οδηγεί" κάθε νέα ενότητα
+% answer
+%    μια απάντηση σε μια ερώτηση του φύλλου εργασίας
+% theory
+%    μια ενότητα "θεωρίας" (στο τέλος ενός κεφαλαίου)
+% exercise
+%    μια αριθμημένη άσκηση
+% step
+%    ένα αριθμημένο βήμα (για φύλλο εργασίας)
+
+% για μορφοποίηση κώδικα:
+%
+% pycode (περιβάλλον)
+%     κώδικας python χωρίς αρίθμηση
+% pyfile (εντολή)
+%     εισαγωγή κώδικα python από αρχείο
+% pyfilenl (εντολή)
+%     εισαγωγή κώδικα python από αρχείο χωρίς αρίθμηση γραμμών
+% pyfilesrc (εντολή)
+%    εισαγωγή κώδικα από αρχείο με link στο αρχείο
+% pyinline (εντολή)
+%     κώδικας python μέσα στη ροή του κειμένου
+% pyplain (περιβάλλον, για τα φύλλα εργασίας)
+%     κώδικας python χωρίς φόντο
+% pynew (περιβάλλον, για τα φύλλα εργασίας)
+%     κώδικας python με φόντο
+% pyterm (περιβάλλον για τα φύλλα εργασίας)
+%     η είσοδος του χρήστη ή τα περιεχόμενα της οθόνης
+% pyhighlight (εντολή)
+%    highlight κειμένου (χρησιμοποιείται για κώδικα μέσα σε pyplain)
+
+
+%%% επιλογές γλώσσας και γραμματοσειρών για το XeLaTeX
+
+\usepackage{polyglossia}
+\setdefaultlanguage{greek}
+\setmainfont[Ligatures=TeX,SmallCapsFont={Linux Libertine O C},SmallCapsFeatures={Letters=SmallCaps}]{Linux Libertine O}
+\setsansfont{Linux Biolinum O}
+\setmonofont{Ubuntu Mono}
+\enablehyphenation
+
+% αφαίρεση τόνων από τα smallcaps
+\usepackage{xstring}
+\newcommand{\removeaccents}[1]{%
+\def\result{#1}%
+\StrSubstitute{\result}{ά}{α}[\result]%
+\StrSubstitute{\result}{έ}{ε}[\result]%
+\StrSubstitute{\result}{ή}{η}[\result]%
+\StrSubstitute{\result}{ί}{ι}[\result]%
+\StrSubstitute{\result}{ό}{ο}[\result]%
+\StrSubstitute{\result}{ύ}{υ}[\result]%
+\StrSubstitute{\result}{ώ}{ω}[\result]%
+\StrSubstitute{\result}{Ά}{Α}[\result]%
+\StrSubstitute{\result}{Έ}{Ε}[\result]%
+\StrSubstitute{\result}{Ή}{Η}[\result]%
+\StrSubstitute{\result}{Ί}{Ι}[\result]%
+\StrSubstitute{\result}{Ό}{Ο}[\result]%
+\StrSubstitute{\result}{Ύ}{Υ}[\result]%
+\StrSubstitute{\result}{Ώ}{Ω}[\result]%
+\result
+}
+
+\newcommand{\smallcaps}[1]{\textsc{\removeaccents{#1}}}
+
+%%% εικόνες και λεζάντες
+
+\usepackage{graphicx}
+\newcommand{\scaling}{0.9}
+\usepackage{caption}
+\captionsetup{font=footnotesize}
+
+%%% ειδικά περιβάλλοντα
+
+\usepackage{xcolor}
+
+% ερωτήσεις (που οδηγούν στην επόμενη ενότητα)
+\definecolor{questioncolor}{rgb}{0.6,0.5,0.5}
+\newenvironment{question}{\noindent\itshape\color{questioncolor}}{\noindent\ignorespaces}
+
+% απαντήσεις (για τις ερωτήσεις των φύλλων εργασίας)
+\definecolor{answercolor}{rgb}{0.5,0.5,0.5}
+\newenvironment{answer}{\marginnote[16pt]{\iconfillin}\noindent\itshape\color{answercolor}}{\noindent\ignorespaces}
+
+% περιβάλλον "θεωρίας" (πλήρες πλάτος κειμένου)
+\usepackage{changepage}
+\newenvironment{theory}[1]{\begin{adjustwidth}{}{-\overhang}\smallcaps{#1}\itshape}{\end{adjustwidth}}
+
+% απομεινάρια...
+% \newlength{\theoryrulelength}
+% \setlength{\theoryrulelength}{36pt}
+% \newenvironment{theory}{\rule{\theoryrulelength}{0.4pt}\begin{adjustwidth}{}{-\overhang}\itshape}{\end{adjustwidth}\rule{\theoryrulelength}{0.4pt}}
+
+%%% υπερσύνδεσμοι
+
+\definecolor{linkcolor}{rgb}{0.0,0.5,0.25}
+\usepackage[colorlinks=true,urlcolor=linkcolor]{hyperref}
+
+%%% εικονίδια και εστιγμένες γραμμές (για τα φύλλα εργασίας)
+
+\newcommand{\iconcomputer}{\includegraphics[scale=0.35]{../../share/circle-icons/one-color/computer.eps}}
+\newcommand{\iconkeyboard}{\includegraphics[scale=0.35]{../../share/circle-icons/one-color/keyboard.eps}}
+\newcommand{\icondiscuss}{\includegraphics[scale=0.35]{../../share/circle-icons/one-color/chat.eps}}
+\newcommand{\iconfillin}{\includegraphics[scale=0.35]{../../share/circle-icons/one-color/compose.eps}}
+\newcommand{\iconcaution}{\includegraphics[scale=0.35]{../../share/circle-icons/one-color/caution.eps}}
+\newcommand{\iconprompt}{\includegraphics[scale=0.35]{../../share/circle-icons/one-color/prompt.eps}}
+\newcommand{\dottedline}{\vspace{\parskip}\dotfill}
+
+%%% συνεχίζεται στην επόμενη σελίδα
+
+\newcommand{\tobecontinued}{\mbox{}\hfill{\footnotesize ...συνεχίζεται στην επόμενη σελίδα.}}
+\newenvironment{note}{\small\upshape}{}
+
+%%% μορφοποίηση κώδικα με το pygmentize
+
+\usepackage{minted}
+
+% fix για ένα bug στο minted που εμφανίζεται όταν χρησιμοποιείται χρώμα στο φόντο (bgcolor)
+% http://tex.stackexchange.com/questions/228058/how-to-space-before-and-after-a-minted-code-block-with-bgcolor
+\makeatletter
+\patchcmd{\minted@colorbg}{\noindent}{\noindent}{}{}
+\apptocmd{\endminted@colorbg}{}{}{}
+\makeatother
+
+% χρώματα φόντου για τον κώδικα
+\definecolor{codebg}{rgb}{0.80,0.95,0.85}
+\definecolor{newcodebg}{rgb}{0.75,0.95,0.85}
+
+% ορισμοί για τα περιβάλλοντα κώδικα
+% pycode: περιβάλλον κώδικα python χωρίς αρίθμηση
+\newminted[pycode]{python3}{bgcolor=codebg}
+% pyfile: python από αρχείο
+\newmintedfile[pyfile]{python3}{linenos=true,numberblanklines=false,escapeinside=||,bgcolor=codebg}
+% pyfilenl: python από αρχείο χωρίς αρίθμηση γραμμών
+\newmintedfile[pyfilenl]{python3}{linenos=false,numberblanklines=false,escapeinside=||,bgcolor=codebg}
+% pyinline: python μέσα στη ροή του κειμένου
+\newmintinline[pyinline]{python3}{linenos=true,numberblanklines=false}
+% pyplain: (για τα φύλλα εργασίας) περιβάλλον χωρίς φόντο
+\newminted[pyplain]{python3}{bgcolor=white,escapeinside=||,formatcom={\upshape}}
+% pynew: (για τα φύλλα εργασίας) περιβάλλον με φόντο
+\newminted[pynew]{python3}{bgcolor=newcodebg,escapeinside=||,formatcom={\upshape}}
+% pyterm: (για τα φύλλα εργασίας) περιβάλλον για τα περιεχόμενα της οθόνης
+\newminted[pyterm]{text}{bgcolor=white,escapeinside=||}
+
+%\newminted[pyterm]{text}{escapeinside=||}
+% [TODO] fix: το pyterm χωρίς bgcolor εμφανίζει μεγαλύτερα περιθώρια (πάνω και κάτω) και δεν φαίνεται ωραίο. Το bgcolor είναι προσωρινό workaround, έχει κι αυτό margins (για να μην είναι κολλητά ο κώδικας με το περιθώριο) κι έτσι ο κώδικας στ' αριστερά δεν είναι τέλεια στοιχισμένος.
+
+% εντολή για κώδικα από αρχείο με link στο αρχείο
+\newcommand{\pyfilesrc}[2][]{%
+\pyfile[#1]{#2}\\
+\mbox{}\hfill{\scriptsize\href{http://pythonies.mysch.gr/#2}{\url{#2}}}
+}
+
+% εντολή για το highlighting του κώδικα (συνήθως σε pyplain περιβάλλον με escapeinside)
+\newcommand{\pyhighlight}[1]{\colorbox{newcodebg}{#1}}
+
+%%% αριθμημένα περιβάλλοντα
+
+\usepackage{ntheorem}
+
+% άσκηση
+\makeatletter
+\theoremheaderfont{\upshape}%\upshape\bfseries\scshape}
+\theorembodyfont{\itshape}%\slshape}
+\newtheoremstyle{lmargin}%
+  {\item[\theorem@headerfont \llap{##2}\hskip\labelsep\hskip-6pt]}%
+  {\item[\theorem@headerfont \llap{##2}\hskip\labelsep ##1\ (##3)\theorem@separator]}
+\makeatother
+\theoremstyle{lmargin}
+\newtheorem{exercise}{}[chapter]
+
+% βήμα φύλλου εργασίας
+\makeatletter
+\theoremheaderfont{\bfseries}%\upshape\bfseries\scshape}
+\theorembodyfont{\upshape}%\slshape}
+\newtheoremstyle{lmarginup}%
+  {\item[\theorem@headerfont \llap{##2}\hskip\labelsep\hskip-6pt]}%
+  {\item[\theorem@headerfont \llap{##2}\hskip\labelsep ##1\ (##3)\theorem@separator]}
+\newtheoremstyle{slmarginup}%
+  {\item[\theorem@headerfont \llap{##1##2.}\hskip\labelsep\hskip-6pt]}%
+  {\item[\theorem@headerfont \llap{##2.}\hskip\labelsep ##1\ (##3)\theorem@separator]}
+\makeatother
+
+% deprecated: \newcommand{\standalone}{} to define standalone
+%\ifdefined\standalone
+    \theoremstyle{slmarginup}
+    \newtheorem{step}{}
+%\else
+%    \theoremstyle{lmarginup}
+%    \newtheorem{step}{}[chapter]
+%\fi
+
+%%% γεωμετρία σελίδας και συναφείς ορισμοί από το tufte-latex
+%%% https://tufte-latex.github.io/tufte-latex/
+
+% εσοχή και διάστημα μεταξύ παραγράφων
+% δεν επηρρεάζει το tufte-latex
+\parindent=0pt
+\parskip=6pt
+
+% γεωμετρία σελίδας και ορισμός μηκών
+\usepackage[a4paper,left=24.8mm,top=27.4mm,headsep=2\baselineskip,textwidth=107mm,marginparsep=8.2mm,marginparwidth=49.4mm,textheight=66\baselineskip,headheight=\baselineskip]{geometry}
+
+\setlength{\marginparpush}{12pt}
+\addtolength{\marginparpush}{\parskip}
+\newlength{\fullwidth}
+\setlength{\fullwidth}{\textwidth}
+\addtolength{\fullwidth}{\marginparsep}
+\addtolength{\fullwidth}{\marginparwidth}
+\newlength{\overhang}
+\setlength{\overhang}{\marginparsep}
+\addtolength{\overhang}{\marginparwidth}
+
+% απομεινάρια...
+%\setlength\abovedisplayskip{6pt plus 2pt minus 4pt}
+%\setlength\belowdisplayskip{6pt plus 2pt minus 4pt}
+
+% italicize description run-in headings (instead of the default bold)
+\renewcommand*\descriptionlabel[1]{\hspace\labelsep\normalfont\em #1}
+
+% πλευρική σημείωση
+\newcommand\marginnote[2][0pt]{%
+  \marginpar{\hbox{}\vspace*{#1}\vspace*{-1\baselineskip}\noindent \footnotesize\textup{#2}}%
+  {}%
+}
+
+% formatting title sections
+\setcounter{secnumdepth}{-1}
+
+\usepackage{titlesec}
+\usepackage[nodate]{datetime}
+\newlength{\beforesection}
+\setlength{\beforesection}{3ex plus 0.5ex minus 0.2ex}
+\addtolength{\beforesection}{-\parskip}
+\newlength{\aftersection}
+\setlength{\aftersection}{1.5ex plus 0.2ex}
+\addtolength{\aftersection}{-\parskip}
+\titlespacing*{\section}{0pt}{\beforesection}{\aftersection}
+
+% απομεινάρια...
+%\titlespacing*{\chapter}{0pt}{50pt}{40pt}
+%\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+
+%%% για εισαγωγικό κείμενο κεφαλαίου με χρωματιστό τετράγωνο, συνοδευτικές έννοιες, κλπ.
+
+\newcommand{\abstract}{}
+\newcommand{\boxcolor}{}
+\newcommand{\chaptercolor}{}
+\newcommand{\concepts}{}
+\newcommand{\tmpconcepts}{}
+\newif\ifbonus
+
+% reference: \titleformat{ command }[ shape ]{ format }{ label }{ sep }{ before-code }[ after-code ]
+\titleformat{\chapter}[block]
+{\Huge\sffamily}
+{}
+{0pt}
+{\ifbonus\marginnote[-6pt]{\fcolorbox{\boxcolor}{\chaptercolor}{\makebox(40,40){\strut\textcolor{\boxcolor}{\Huge\thechapter}}}\\\vspace{\parskip}\\\tiny\today\\ \currenttime}\else\marginnote[-6pt]{\colorbox{\boxcolor}{\makebox(40,40){\strut\textcolor{\chaptercolor}{\Huge\thechapter}}}\\\vspace{\parskip}\\\tiny\today\\ \currenttime}\fi}
+[\small\rmfamily\textmd\abstract\vspace{\parskip}\concepts\vspace{\parskip}\\\mbox{}\hrulefill]
+
+\newcommand{\chapterwabstract}[5]{
+	\renewcommand{\abstract}{#2}
+    \renewcommand{\tmpconcepts}{#3}
+	\ifdefempty{\tmpconcepts}{\renewcommand{\concepts}{}}{\renewcommand{\concepts}{\\\textbf{Έννοιες: }\tmpconcepts}}
+	\renewcommand{\boxcolor}{#4}
+	\renewcommand{\chaptercolor}{#5}
+	\chapter{#1}
+}
