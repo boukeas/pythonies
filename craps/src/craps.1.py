@@ -9,10 +9,10 @@ dice2 = random.randint(1,6)
 roll = dice1 + dice2
 print("Έριξες", dice1, dice2, "=", roll)
 # έλεγχος αποτελέσματος
-if roll == 4 or roll == 7:
+if roll == 7 or roll == 11:
     # νίκη με την πρώτη
     print("Κέρδισες με την πρώτη!")
-elif roll <= 3 or roll == 11:
+elif roll <= 3 or roll == 12:
     # ήττα με την πρώτη
     print("Έχασες με την πρώτη...")
 else:

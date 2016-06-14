@@ -148,6 +148,10 @@
 \newcommand{\tobecontinued}{\mbox{}\hfill{\footnotesize ...συνεχίζεται στην επόμενη σελίδα.}}
 \newenvironment{note}{\small\upshape}{}
 
+%%% κεντράρισμα σε στήλη πίνακα σταθερού πλάτους
+
+\newcommand{\pcenter}[1]{\hfill #1\hfill\mbox{}} 
+
 %%% μορφοποίηση κώδικα με το pygmentize
 
 \usepackage{minted}
@@ -171,7 +175,7 @@
 % pyfilenl: python από αρχείο χωρίς αρίθμηση γραμμών
 \newmintedfile[pyfilenl]{python3}{linenos=false,numberblanklines=false,escapeinside=||,bgcolor=codebg}
 % pyinline: python μέσα στη ροή του κειμένου
-\newmintinline[pyinline]{python3}{linenos=true,numberblanklines=false}
+\newmintinline[pyinline]{python3}{linenos=true,numberblanklines=false,formatcom={\upshape}}
 % pyplain: (για τα φύλλα εργασίας) περιβάλλον χωρίς φόντο
 \newminted[pyplain]{python3}{bgcolor=white,escapeinside=||,formatcom={\upshape}}
 % pynew: (για τα φύλλα εργασίας) περιβάλλον με φόντο
@@ -179,7 +183,7 @@
 % pyterm: (για τα φύλλα εργασίας) περιβάλλον για τα περιεχόμενα της οθόνης
 \newminted[pyterm]{text}{bgcolor=white,escapeinside=||}
 % terminline: (για τα φύλλα εργασίας) περιβάλλον για τα περιεχόμενα της οθόνης
-\newmintinline[terminline]{text}{bgcolor=white,escapeinside=||}
+\newmintinline[terminline]{text}{bgcolor=white,escapeinside=||,formatcom={\upshape}}
 
 %\newminted[pyterm]{text}{escapeinside=||}
 % [TODO] fix: το pyterm χωρίς bgcolor εμφανίζει μεγαλύτερα περιθώρια (πάνω και κάτω) και δεν φαίνεται ωραίο. Το bgcolor είναι προσωρινό workaround, έχει κι αυτό margins (για να μην είναι κολλητά ο κώδικας με το περιθώριο) κι έτσι ο κώδικας στ' αριστερά δεν είναι τέλεια στοιχισμένος.

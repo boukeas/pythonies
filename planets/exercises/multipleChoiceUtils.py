@@ -1,3 +1,9 @@
+''' βοηθητική βιβλιοθήκη από το http://pythonies.mysch.gr/chapters/planets.pdf
+
+Αυτή η βιβλιοθήκη περιέχει τον κώδικα για τις ερωτήσεις 
+πολλαπλής επιλογής που αναπτύχθηκε στα πλαίσια αυτού του κεφαλαίου.
+'''
+
 import random
 
 def select(nbChoices, possible, correct):

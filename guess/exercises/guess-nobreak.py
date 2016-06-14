@@ -1,4 +1,11 @@
-﻿import random
+''' επέκταση από το http://pythonies.mysch.gr/chapters/guess.pdf
+
+Διατυπώστε μια εναλλακτική εκδοχή του προγράμματος, στην οποία η
+while θα χρησιμοποιεί την συνθήκη number != secret, αντί για τον
+έλεγχο της λογικής μεταβλητής found ή την χρήση της break.
+'''
+
+import random
 
 def readNumber(a,b):
     """ Ζητάει από το χρήστη έναν αριθμό 
