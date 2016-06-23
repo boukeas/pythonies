@@ -117,7 +117,10 @@
 
 % απαντήσεις (για τις ερωτήσεις των φύλλων εργασίας)
 \definecolor{answercolor}{rgb}{0.5,0.5,0.5}
-\newenvironment{answer}{\marginnote[16pt]{\iconfillin}\noindent\itshape\color{answercolor}}{\noindent\ignorespaces}
+\newenvironment{answer}[1][\iconfillin]%
+{\ifstrempty{#1}{}{\marginnote[16pt]{#1}}%
+\noindent\itshape\color{answercolor}}%
+{\noindent\ignorespaces}
 
 % περιβάλλον "θεωρίας" (πλήρες πλάτος κειμένου)
 \usepackage{changepage}
@@ -292,14 +295,48 @@
 \newcommand{\concepts}{}
 \newcommand{\tmpconcepts}{}
 \newif\ifbonus
+\newif\ifworksheet
+\newif\ifsolutions
 
 % reference: \titleformat{ command }[ shape ]{ format }{ label }{ sep }{ before-code }[ after-code ]
 \titleformat{\chapter}[block]
 {\Huge\sffamily}
 {}
 {0pt}
-{\ifbonus\marginnote[-6pt]{\fcolorbox{\boxcolor}{\chaptercolor}{\makebox(40,40){\strut\textcolor{\boxcolor}{\Huge\thechapter}}}\\\vspace{\parskip}\\\tiny\today\\ \currenttime}\else\marginnote[-6pt]{\colorbox{\boxcolor}{\makebox(40,40){\strut\textcolor{\chaptercolor}{\Huge\thechapter}}}\\\vspace{\parskip}\\\tiny\today\\ \currenttime}\fi}
-[\small\rmfamily\textmd\abstract\vspace{\parskip}\concepts\vspace{\parskip}\\\mbox{}\hrulefill]
+{\ifbonus%
+    \marginnote[-6pt]{%
+        \fcolorbox{\boxcolor}{\chaptercolor}%
+        {\makebox(40,40){\strut\textcolor{\boxcolor}{\Huge\thechapter}}}\\%
+        \vspace{\parskip}\\%
+        \tiny\today\\ \currenttime}%
+\else%
+    \marginnote[-6pt]{%
+        \colorbox{\boxcolor}{\makebox(40,40){\strut\textcolor{\chaptercolor}{\Huge\thechapter}}}\\%
+        \vspace{\parskip}\\%
+        \tiny\today\\ \currenttime}%
+\fi}
+[\ifworksheet
+    \vspace{-\parskip}
+    \Large
+    \ifsolutions
+        Ενδεικτικές Απαντήσεις Φύλλου Εργασίας \hrulefill
+    \else
+        \vspace{2 pt}
+        Φύλλο Εργασίας\ \hrulefill
+        \vspace{\parskip}\\
+        \small\rmfamily\textmd\abstract
+        \vspace{\parskip}
+        \concepts
+        \vspace{\parskip}\\\mbox{}\hrulefill
+    \fi
+\else
+    \vspace{-10pt}
+    \hrulefill\\
+    \small\rmfamily\textmd\abstract
+    \vspace{\parskip}
+    \concepts
+    \vspace{\parskip}\\\mbox{}\hrulefill
+\fi]
 
 \newcommand{\chapterwabstract}[5]{
 	\renewcommand{\abstract}{#2}
