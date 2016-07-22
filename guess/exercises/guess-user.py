@@ -29,7 +29,7 @@ def computerchoice(a,b,tries):
         return (a + b) // 2
     else:
         # επιλογή τυχαίου αριθμού
-        return random.randint(low,high)
+        return random.randint(a, b)
 
 # οι μεταβλητές low και high είναι τα όρια 
 # ανάμεσα στα οποία βρίσκεται ο μυστικός αριθμός
