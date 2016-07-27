@@ -172,9 +172,13 @@
 
 % ορισμοί για τα περιβάλλοντα κώδικα
 % pycode: περιβάλλον κώδικα python χωρίς αρίθμηση
-\newminted[pycode]{python3}{bgcolor=codebg}
-% pyfile: python από αρχείο
+\newminted[pycode]{python3}{bgcolor=codebg,formatcom={\upshape}}
+% pyfile: python από αρχείο (deprecated)
 \newmintedfile[pyfile]{python3}{linenos=true,numberblanklines=false,escapeinside=||,bgcolor=codebg}
+% pyfilenew: python από αρχείο (εισαγωγή νέου κώδικα)
+\newmintedfile[pyfilenew]{python3}{linenos=true,numberblanklines=false,escapeinside=||,bgcolor=codebg}
+% pyfilenew: python από αρχείο (υφιστάμενος κώδικας)
+\newmintedfile[pyfileplain]{python3}{linenos=true,numberblanklines=false,escapeinside=||,bgcolor=white}
 % pyfilenl: python από αρχείο χωρίς αρίθμηση γραμμών
 \newmintedfile[pyfilenl]{python3}{linenos=false,numberblanklines=false,escapeinside=||,bgcolor=codebg}
 % pyinline: python μέσα στη ροή του κειμένου
@@ -184,18 +188,71 @@
 % pynew: (για τα φύλλα εργασίας) περιβάλλον με φόντο
 \newminted[pynew]{python3}{bgcolor=newcodebg,escapeinside=||,formatcom={\upshape}}
 % pyterm: (για τα φύλλα εργασίας) περιβάλλον για τα περιεχόμενα της οθόνης
-\newminted[pyterm]{text}{bgcolor=white,escapeinside=||}
+\newminted[pyterm]{text}{bgcolor=white,escapeinside=||,formatcom={\upshape}}
 % terminline: (για τα φύλλα εργασίας) περιβάλλον για τα περιεχόμενα της οθόνης
 \newmintinline[terminline]{text}{bgcolor=white,escapeinside=||,formatcom={\upshape}}
 
 %\newminted[pyterm]{text}{escapeinside=||}
 % [TODO] fix: το pyterm χωρίς bgcolor εμφανίζει μεγαλύτερα περιθώρια (πάνω και κάτω) και δεν φαίνεται ωραίο. Το bgcolor είναι προσωρινό workaround, έχει κι αυτό margins (για να μην είναι κολλητά ο κώδικας με το περιθώριο) κι έτσι ο κώδικας στ' αριστερά δεν είναι τέλεια στοιχισμένος.
 
-% εντολή για κώδικα από αρχείο με link στο αρχείο
+% εντολή για κώδικα από αρχείο με link στο αρχείο (deprecated)
 \newcommand{\pyfilesrc}[2][]{%
 \pyfile[#1]{#2}\\
 \mbox{}\hfill{\scriptsize\href{http://pythonies.mysch.gr/#2}{\url{#2}}}
 }
+
+% αποθετήριο github
+\newcommand{\repository}{https://github.com/boukeas/pythonies/tree/master}
+
+% link σε οποιοδήποτε αρχείο του αποθετηρίου
+\newcommand{\repositorylink}[4][]{
+    \ifthenelse{\equal{#1}{}}{%
+        \ifthenelse{\equal{#3}{}}{%
+            \href{\repository/#2/#4}{\url{#2/#4}}%
+        }{%
+            \href{\repository/#2/#3/#4}{\url{#2/#3/#4}}%
+        }%
+    }{%
+    \ifthenelse{\equal{#1}{nochapter}}{%
+        \ifthenelse{\equal{#3}{}}{%
+            \href{\repository/#2/#4}{\url{#4}}%
+        }{%
+            \href{\repository/#2/#3/#4}{\url{#3/#4}}%
+        }%
+    }{%
+    \ifthenelse{\equal{#1}{nosubdir}}{%
+        \ifthenelse{\equal{#3}{}}{%
+            \href{\repository/#2/#4}{\url{#4}}%
+        }{%
+            \href{\repository/#2/#3/#4}{\url{#4}}%
+        }%
+    }{}}}%
+}
+
+% link σε αρχείο λύσης
+\newcommand{\solutionlink}[2]{
+    \\\mbox{}\vspace{-\parskip}\hfill{\scriptsize\textup{\repositorylink{#1}{exercises}{#2}}}}
+
+% εντολή για κώδικα από αρχείο: 
+% #1 παράμετροι μορφοποίησης, #2 όνομα αρχείου
+% #3 αν είναι κενό τότε νέος κωδικας, αλλιώς υφιστάμενος
+% #4 αν δεν είναι κενό τότε link στο αρχείο, στον κατάλογο #4
+\newcommand{\pysrc}[4][]{%
+    \ifthenelse{\equal{#3}{}}{%
+        \pyfilenew[#1]{#2}%
+    }{%
+        \pyfileplain[#1]{#2}%
+    }\vspace{-2pt}%
+\ifthenelse{\equal{#4}{}}%
+% normal box, without reference or continuing part
+{\vspace{2pt}}{%
+\ifthenelse{\equal{#4}{continued}}%
+% box with continuing part
+{}{%
+% box with reference
+\vspace{2pt}\\\mbox{}\hfill{\scriptsize\repositorylink{#4}{}{#2}}}}}
+%{\vspace{2pt}\\\mbox{}\hfill{}\vspace{-4pt}}%
+
 
 % εντολή για το highlighting του κώδικα (συνήθως σε pyplain περιβάλλον με escapeinside)
 \newcommand{\pyhighlight}[1]{\colorbox{newcodebg}{#1}}
@@ -319,12 +376,12 @@
         \fcolorbox{\boxcolor}{\chaptercolor}%
         {\makebox(40,40){\strut\textcolor{\boxcolor}{\Huge\thechapter}}}\\%
         \vspace{\parskip}\\%
-        \tiny\today\\ \currenttime}%
+        \tiny\today\vspace{-\parskip}\\\mbox{}\currenttime}%
 \else%
     \marginnote[-6pt]{%
         \colorbox{\boxcolor}{\makebox(40,40){\strut\textcolor{\chaptercolor}{\Huge\thechapter}}}\\%
         \vspace{\parskip}\\%
-        \tiny\today\\ \currenttime}%
+        \tiny\today\vspace{-\parskip}\\\mbox{}\currenttime}%
 \fi}
 [\ifworksheet
     \vspace{-\parskip}
