@@ -1,6 +1,6 @@
 import time
 # είσοδος ονόματος
-print("Πώς σε λένε;", end=" ")
+print("Πώς σε λένε;")
 name = input()
 # χαιρετισμός
 print("Καλημέρα", name)

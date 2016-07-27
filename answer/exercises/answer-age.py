@@ -8,7 +8,7 @@
 import time
 
 # είσοδος ονόματος
-print("Πώς σε λένε;", end=" ")
+print("Πώς σε λένε;")
 name = input()
 # ανάκτηση τοπικής ώρας συστήματος
 hour = time.localtime().tm_hour
@@ -19,7 +19,7 @@ else:
     print("Καλησπέρα", name)
 
 # είσοδος έτους γέννησης
-print("Ποια χρονιά γεννήθηκες;", end=" ")
+print("Ποια χρονιά γεννήθηκες;")
 birth = int(input())
 # ανάκτηση τρέχουσας χρονιάς
 year = time.localtime().tm_year

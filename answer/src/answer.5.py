@@ -1,6 +1,6 @@
 import time
 # είσοδος ονόματος
-print("Πώς σε λένε;", end=" ")
+print("Πώς σε λένε;")
 name = input()
 # ανάκτηση τοπικής ώρας συστήματος
 hour = time.localtime().tm_hour
