@@ -1,5 +1,4 @@
 import random
-
 def rollDice():
     """ Ρίχνει δύο ζάρια και επιστρέφει 
     το άθροισμα των ενδείξεών τους.
@@ -14,7 +13,6 @@ def rollDice():
     roll = dice1 + dice2
     print("Έριξες", dice1, dice2, "=", roll)
     return roll
-
 # ρίψη αρχικής ζαριάς
 roll = rollDice()
 # έλεγχος αποτελέσματος
@@ -42,3 +40,4 @@ else:
             print("Έχασες...")
             # το παιχνίδι τελείωσε
             over = True
+

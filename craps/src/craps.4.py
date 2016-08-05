@@ -16,11 +16,12 @@ elif roll <= 3 or roll == 12:
     # ήττα με την πρώτη
     print("Έχασες με την πρώτη...")
 else:
-    # τίθεται το "σημείο"
-    point = roll
-    print("Πρέπει να φέρεις", point)
+    # τίθεται ο "στόχος"
+    print("Ξαναρίξε. Πρέπει να φέρεις", roll)
+    # το παιχνίδι δεν έχει τελειώσει
+    over = False
     # επανάληψη ρίψεων
-    while True:
+    while not over:
         # προτροπή για ρίψη ζαριών
         print("Ρίξε τα ζάρια με ENTER...", end="")
         input()
@@ -28,14 +29,15 @@ else:
         dice1 = random.randint(1,6)
         dice2 = random.randint(1,6)
         # υπολογισμός και εμφάνιση ζαριάς
-        roll = dice1 + dice2
-        print("Έριξες", dice1, dice2, "=", roll)
+        newroll = dice1 + dice2
+        print("Έριξες", dice1, dice2, "=", newroll)
         # έλεγχος αποτελέσματος
-        if roll == point:
+        if newroll == roll:
             print("Κέρδισες!")
-            # το παιχνίδι τελείωσε - άμεση διακοπή
-            break
-        elif roll == 7:
+            # το παιχνίδι τελείωσε
+            over = True
+        elif newroll == 7:
             print("Έχασες...")
-            # το παιχνίδι τελείωσε - άμεση διακοπή
-            break
+            # το παιχνίδι τελείωσε
+            over = True
+

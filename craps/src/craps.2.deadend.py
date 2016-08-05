@@ -25,10 +25,5 @@ else:
     dice1 = random.randint(1,6)
     dice2 = random.randint(1,6)
     # υπολογισμός και εμφάνιση ζαριάς
-    newroll = dice1 + dice2
-    print("Έριξες", dice1, dice2, "=", newroll)
-    # έλεγχος αποτελέσματος
-    if newroll == roll:
-        print("Κέρδισες!")
-    elif newroll == 7:
-        print("Έχασες...")
+    roll = dice1 + dice2
+    print("Έριξες", dice1, dice2, "=", roll)

@@ -470,10 +470,8 @@ print("Έριξες", dice1, "και", dice2, "=", roll)
 
 \clearpage
 \marginnote[16pt]{% 
-\begin{center}
-\includegraphics[scale=\scaling]{../illustrations/rollDice.pdf}
-\end{center}
-Εικόνα: Η συνάρτηση \pyinline{rollDice} είναι ένα ανεξάρτητο τμήμα κώδικα, ένα αυτόνομο ``εξάρτημα'' που επιτελεί μια συγκεκριμένη λειτουργία.}
+\center\includegraphics[scale=\scaling]{../illustrations/rollDice.pdf}
+\captionof{figure}{Η συνάρτηση \pyinline{rollDice} είναι ένα ανεξάρτητο τμήμα κώδικα, ένα αυτόνομο ``εξάρτημα'' που επιτελεί μια συγκεκριμένη λειτουργία. Όταν κληθεί, η συνάρτηση προσομοιώνει τη ρίψη δύο ζαριών κι επιστρέφει το άθροισμα των ενδείξεών τους.}}
 
 \begin{pynew}
 def rollDice():
@@ -486,7 +484,7 @@ def rollDice():
     return roll
 \end{pynew}
 
-Με τον τρόπο αυτό \emph{ορίζεται} η συνάρτηση \pyinline{rollDice()}, οι εντολές τις οποίας υλοποιούν το ``ρίξιμο'' των ζαριών.
+Με τον τρόπο αυτό \emph{ορίζεται} η συνάρτηση \pyinline{rollDice()}, οι εντολές της οποίας υλοποιούν το ``ρίξιμο'' των ζαριών.
 Σημειώστε πως το αποτέλεσμα της συνάρτησης, δηλαδή η τιμή της μεταβλητής \pyinline{roll}, \emph{επιστρέφεται} από την συνάρτηση με την εντολή \pyinline{return}.
 \end{step}
 

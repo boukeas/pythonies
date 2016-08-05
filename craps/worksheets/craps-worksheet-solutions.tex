@@ -372,16 +372,13 @@ print("Έριξες", dice1, "και", dice2, "=", roll)
 \begin{answer}[]
 Στο αποτέλεσμα της πρώτης ζαριάς δίνεται το όνομα \pyinline{roll}.
 \marginnote[-8pt]{% 
-\begin{center}
-\includegraphics[scale=\scaling]{../illustrations/roll-1.pdf}
-\end{center}
-Εικόνα: Η πρώτη ζαριά αποθηκεύεται στη μεταβλητή \pyinline{roll}.}
+\center\includegraphics[scale=\scaling]{../illustrations/roll-1.pdf}
+\captionof*{figure}{Αρχικά, η τιμή της μεταβλητής \pyinline{roll} αντιστοιχεί στο αποτέλεσμα της πρώτης ζαριάς.}}
 Κατά τη δεύτερη ρίψη, χρησιμοποιείται το ίδιο όνομα για το αποτέλεσμα της δεύτερης ζαριάς, με συνέπεια το όνομα \pyinline{roll} ν' αντιστοιχεί πλέον σε αυτή και να μην υπάρχει τρόπος αναφοράς στην πρώτη τιμή.%
 \marginnote{% 
-\begin{center}
+\center
 \includegraphics[scale=\scaling]{../illustrations/roll-2.pdf}
-\end{center}
-Εικόνα: Η νέα ζαριά αποθηκεύεται επίσης στη \pyinline{roll}. Δεν υπάρχει πλέον τρόπος αναφοράς στην προηγούμενη τιμή της μεταβλητής.}
+\captionof*{figure}{Στη συνέχεια, η \pyinline{roll} χρησιμοποιείται για το αποτέλεσμα της δεύτερης ζαριάς και η τιμή της τροποποιείται. Το αποτέλεσμα της πρώτης ζαριάς δεν είναι πια διαθέσιμο.}}
 % Το αποτέλεσμα της πρώτης ζαριάς αποθηκεύεται στη μεταβλητή \pyinline{roll}. Κατά τη δεύτερη ρίψη, χρησιμοποιείται η ίδια μεταβλητή, η \pyinline{roll}, για ν' αποθηκευτεί το αποτέλεσμα της δεύτερης ζαριάς, με συνέπεια η προηγούμενη τιμή να ``επικαλύπτεται'' και να μην είναι πλέον διαθέσιμη.
 \end{answer}
 
@@ -390,10 +387,8 @@ print("Έριξες", dice1, "και", dice2, "=", roll)
 \begin{answer}[]
 Όχι,%
 \marginnote{% 
-\begin{center}
-\includegraphics[scale=\scaling]{../illustrations/roll-3.pdf}
-\end{center}
-Εικόνα: Η νέα ζαριά αποθηκεύεται σε διαφορετική μεταβλητή, τη \pyinline{newroll}. Και οι δύο ζαριές είναι διαθέσιμες.}
+\center\includegraphics[scale=\scaling]{../illustrations/roll-3.pdf}
+\captionof*{figure}{Το αποτέλεσμα της δεύτερης ζαριάς ονομάζεται \pyinline{newroll}. Οι δυο ζαριές, οι τιμές \pyinline{roll} και \pyinline{newroll} μπορούν να συγκριθούν μεταξύ τους.}}
 δεν μπορούμε να τις συγκρίνουμε: η τιμή της πρώτης ζαριάς δεν είναι διαθέσιμη. Ούτε έχει νόημα να εξετάσουμε τη συνθήκη \pyinline{roll == roll} μιας και είναι πάντα \pyinline{Αληθής}. Για να διορθώσουμε το πρόβλημα πρέπει να αποθηκεύσουμε το αποτέλεσμα κάθε ζαριάς σε διαφορετική μεταβλητή.
 \end{answer}
 
@@ -482,10 +477,8 @@ print("Έριξες", dice1, "και", dice2, "=", roll)
 
 \clearpage
 \marginnote[16pt]{% 
-\begin{center}
-\includegraphics[scale=\scaling]{../illustrations/rollDice.pdf}
-\end{center}
-Εικόνα: Η συνάρτηση \pyinline{rollDice} είναι ένα ανεξάρτητο τμήμα κώδικα, ένα αυτόνομο ``εξάρτημα'' που επιτελεί μια συγκεκριμένη λειτουργία.}
+\center\includegraphics[scale=\scaling]{../illustrations/rollDice.pdf}
+\captionof*{figure}{Η συνάρτηση \pyinline{rollDice} είναι ένα ανεξάρτητο τμήμα κώδικα, ένα αυτόνομο ``εξάρτημα'' που επιτελεί μια συγκεκριμένη λειτουργία. Όταν κληθεί, η συνάρτηση προσομοιώνει τη ρίψη δύο ζαριών κι επιστρέφει το άθροισμα των ενδείξεών τους.}}
 
 \begin{pynew}
 def rollDice():
@@ -498,7 +491,7 @@ def rollDice():
     return roll
 \end{pynew}
 
-Με τον τρόπο αυτό \emph{ορίζεται} η συνάρτηση \pyinline{rollDice()}, οι εντολές τις οποίας υλοποιούν το ``ρίξιμο'' των ζαριών.
+Με τον τρόπο αυτό \emph{ορίζεται} η συνάρτηση \pyinline{rollDice()}, οι εντολές της οποίας υλοποιούν το ``ρίξιμο'' των ζαριών.
 Σημειώστε πως το αποτέλεσμα της συνάρτησης, δηλαδή η τιμή της μεταβλητής \pyinline{roll}, \emph{επιστρέφεται} από την συνάρτηση με την εντολή \pyinline{return}.
 \end{step}
 
