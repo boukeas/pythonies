@@ -1,4 +1,5 @@
 import random
+
 def next(p):
     """ Επιστρέφει τον αριθμό του παίκτη
     που παίζει μετά τον παίκτη p.
@@ -8,6 +9,7 @@ def next(p):
         return 2
     else:
         return 1
+
 def maxMatches(m):
     """ Επιστρέφει το μέγιστο πλήθος σπίρτων
     που επιτρέπεται να αφαιρεθούν.
@@ -18,6 +20,7 @@ def maxMatches(m):
         return 3
     else:
         return m
+
 def readMatches(p,m):
     """ Διαβάζει από το χρήστη κι επιστρέφει
     το πλήθος σπίρτων που θα αφαιρεθούν.
@@ -39,12 +42,14 @@ def readMatches(p,m):
         num = int(input())
     # επιστροφή τιμής
     return num
+
 def randomMatches(m):
     """ Επιλέγει κι επιστρέφει ένα τυχαίο
     αλλά έγκυρο πλήθος σπίρτων που θα αφαιρεθούν.
     m: πλήθος σπίρτων που απομένουν
     """
     return random.randint(1,maxMatches(m))
+
 def computeMatches(m):
     """ Επιλέγει κι επιστρέφει το βέλτιστο
     πλήθος σπίρτων που θα πρέπει να αφαιρεθούν. 
@@ -57,7 +62,9 @@ def computeMatches(m):
         # ανεπιθύμητη νησίδα: τυχαία κίνηση
         return randomMatches(m)
     else:
+        # σπίρτα που πρέπει να αφαιρεθούν
         return mod
+
 # αρχικό πλήθος σπίρτων
 matches = random.randint(7,21)
 # εμφάνιση αρχικού πλήθους σπίρτων
@@ -66,8 +73,9 @@ print("Αρχικό πλήθος σπίρτων:", matches)
 computer = random.randint(1,2)
 # ορισμός παίκτη που θα παίξει πρώτος
 player = 1
-# επανάληψη: συνεχίζεται όσο υπάρχουν σπίρτα
-while matches > 0:
+
+# επανάληψη: συνεχίζεται όσο υπάρχουν παραπάνω από ένα σπίρτα
+while matches > 1:
     # επιλογή κίνησης, ανάλογα με τον παίκτη
     if player == computer:
         # σπίρτα που θα πάρει ο υπολογιστής 
@@ -82,8 +90,16 @@ while matches > 0:
     print("Σπίρτα που απομένουν:", matches)
     # εναλλαγή παίκτη
     player = next(player)
-# εμφάνιση αποτελέσματος παιχνιδιού
-if player == computer:
-    print("Κέρδισε ο υπολογιστής.")
+
+# εμφάνιση αποτελέσματος παιχνιδιού 
+if matches == 0:
+    if player == computer:
+        print("Κέρδισε ο υπολογιστής.")
+    else:
+        print("Παίκτη", player, "κέρδισες!")
 else:
-    print("Παίκτη", player, "κέρδισες!")
+    if player == computer:
+        print("Παίκτη", player, "κέρδισες!")
+    else:
+        print("Κέρδισε ο υπολογιστής.")
+
