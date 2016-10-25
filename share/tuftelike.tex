@@ -170,15 +170,17 @@
 \definecolor{codebg}{rgb}{0.80,0.95,0.85}
 \definecolor{newcodebg}{rgb}{0.75,0.95,0.85}
 
+% [TODO] από τα περιβάλλοντα που ακολουθούν, σβήσε αυτά που είναι deprecated.
+
 % ορισμοί για τα περιβάλλοντα κώδικα
 % pycode: περιβάλλον κώδικα python χωρίς αρίθμηση
 \newminted[pycode]{python3}{bgcolor=codebg,formatcom={\upshape}}
 % pyfile: python από αρχείο (deprecated)
 \newmintedfile[pyfile]{python3}{linenos=true,numberblanklines=false,escapeinside=||,bgcolor=codebg}
 % pyfilenew: python από αρχείο (εισαγωγή νέου κώδικα)
-\newmintedfile[pyfilenew]{python3}{linenos=true,numberblanklines=false,escapeinside=||,bgcolor=codebg}
+\newmintedfile[pyfilenew]{python3}{linenos=true,numberblanklines=false,escapeinside=||,bgcolor=codebg,formatcom={\upshape}}
 % pyfilenew: python από αρχείο (υφιστάμενος κώδικας)
-\newmintedfile[pyfileplain]{python3}{linenos=true,numberblanklines=false,escapeinside=||,bgcolor=white}
+\newmintedfile[pyfileplain]{python3}{linenos=true,numberblanklines=false,escapeinside=||,bgcolor=white,formatcom={\upshape}}
 % pyfilenl: python από αρχείο χωρίς αρίθμηση γραμμών
 \newmintedfile[pyfilenl]{python3}{linenos=false,numberblanklines=false,escapeinside=||,bgcolor=codebg}
 % pyinline: python μέσα στη ροή του κειμένου
@@ -206,6 +208,7 @@
 
 % link σε οποιοδήποτε αρχείο του αποθετηρίου
 \newcommand{\repositorylink}[4][]{
+    \textup{
     \ifthenelse{\equal{#1}{}}{%
         \ifthenelse{\equal{#3}{}}{%
             \href{\repository/#2/#4}{\url{#2/#4}}%
@@ -226,12 +229,12 @@
         }{%
             \href{\repository/#2/#3/#4}{\url{#4}}%
         }%
-    }{}}}%
+    }{}}}}%
 }
 
 % link σε αρχείο λύσης
 \newcommand{\solutionlink}[2]{
-    \\\mbox{}\vspace{-\parskip}\hfill{\scriptsize\textup{\repositorylink{#1}{exercises}{#2}}}}
+    \\\mbox{}\vspace{-\parskip}\hfill{\scriptsize\repositorylink{#1}{exercises}{#2}}}
 
 % εντολή για κώδικα από αρχείο: 
 % #1 παράμετροι μορφοποίησης, #2 όνομα αρχείου
@@ -413,6 +416,24 @@
 	\ifdefempty{\tmpconcepts}{\renewcommand{\concepts}{}}{\renewcommand{\concepts}{\\\textbf{Έννοιες: }\tmpconcepts}}
 	\renewcommand{\boxcolor}{#4}
 	\renewcommand{\chaptercolor}{#5}
-	\chapter{#1}
+	\chapter{#1}\label{currentchapter}
 }
+
+% υπογραφή και άδεια χρήσης
+
+\newif\iffulllicense
+
+\newcommand{\sign}[2]{%
+\marginnote[18pt]{\includegraphics{../share/license/by-sa.png}\\
+\href{https://creativecommons.org/licenses/by-sa/4.0/deed.el}{\url{creativecommons.org/licenses/by-sa/4.0/deed.el}}}%
+\emph{Pythonies - \nameref*{currentchapter}}\\%
+\href{http://pythonies.mysch.gr/#2}{\url{pythonies.mysch.gr/#2}}\\%
+#1 (2015-2016)
+
+\small{
+Το παρόν υλικό διατίθεται με άδεια 
+\href{https://creativecommons.org/licenses/by-sa/4.0/deed.el}{Creative Commons BY-SA 4.0}. 
+\iffulllicense Μπορείτε να το αναδιανείμετε και να το τροποποιήσετε με κάθε μέσο και τρόπο και για κάθε σκοπό. Θα πρέπει να κάνετε \emph{αναφορά στους δημιουργούς}, αλλά όχι με τρόπο που να υπονοεί ότι οι δημιουργοί αποδέχονται το έργο σας ή τη χρήση που εσείς κάνετε. Θα πρέπει επίσης να παρέχετε σύνδεσμο προς την άδεια χρήσης. Αν τροποποιήσετε το υλικό ή βασιστείτε σε αυτό, θα πρέπει να αναφέρετε ότι έχουν γίνει αλλαγές και \emph{να διανείμετε τις δικές σας συνεισφορές υπό την ίδια άδεια} όπως και το πρωτότυπο.
+Δεν παρέχεται καμία εγγύηση. Η άδεια μπορεί να μη σας δίνει όλα τα απαραίτητα δικαιώματα για τη χρήση που σκοπεύετε. Για παράδειγμα, άλλα δικαιώματα, όπως διαφήμιση, ιδιωτικότητα, ή ηθικά δικαιώματα μπορεί να περιορίσουν το πως χρησιμοποιείτε το υλικό.
+}\fi}
 
