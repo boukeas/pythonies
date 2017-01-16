@@ -1,5 +1,6 @@
 import random
 import collections
+import itertools
 from abc import ABC, abstractmethod
 
 """
@@ -768,7 +769,7 @@ class PossibleSetStrategy(Strategy):
         συμβατών κωδικών λέξεων για να υλοποιήσουν μια στρατηγική.
     """
 
-    def generate(self, length):
+    def generate_recursive(self, length):
         """ Κατασκευάζει *αναδρομικά* το σύνολο των πιθανών κωδικών λέξεων
             συγκεκριμένου μεγέθους.
 
@@ -784,6 +785,14 @@ class PossibleSetStrategy(Strategy):
             return set(Code((element,) + code)
                        for element in self.game.elements
                        for code in self.generate(length-1))
+
+    def generate(self, length):
+        """ Κατασκευάζει το σύνολο των πιθανών κωδικών λέξεων συγκεκριμένου
+            μεγέθους.
+
+            length: το μέγεθος των κωδικών λέξεων που θα δημιουργηθούν
+        """
+        return set(itertools.product((Code(element) for element in self.game.elements), repeat=length))
 
     def __init__(self, game):
         super().__init__(game)
